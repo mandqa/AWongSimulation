@@ -32,5 +32,6 @@ public class GameManager : MonoBehaviour
         Vector3 newPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         newPos.z = 0;
         allFood.Add(Instantiate(foodObj, newPos, Quaternion.identity));
+        Debug.Log("Food added" + allFood.Count);
     }
 }
