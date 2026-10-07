@@ -3,6 +3,15 @@ using UnityEngine;
 public class CupcakeBehavior : MonoBehaviour
 {
     public Animator animator;
+    public GameManager myManager;
+
+    float fullnessVal = 3f;
+    float needsTime;
+
+    public float needsTimeReset;
+    public float needsTimeStep;
+
+    GameObject targetFood;
     
     //behavior states
     enum CupcakeState
@@ -28,6 +37,7 @@ public class CupcakeBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        needsTime = needsTimeReset;
         SetState(CupcakeState.Exploring);
         ChooseNewSpot();
     }
@@ -38,15 +48,36 @@ public class CupcakeBehavior : MonoBehaviour
         //exploring
         if (currentState == CupcakeState.Exploring)
         {
-            if (moving)
+            needsTime -= needsTimeStep * Time.deltaTime;
+            if (needsTime <= 0)
+            {
+                IncrementNeeds();
+            }
+        }
+        if (currentState == CupcakeState.Exploring)
+        {
+        if (moving)
             {
                 transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
                 //reached a new spot
                 if (Vector3.Distance(transform.position, targetPos) < 0.1f)
                 {
                     moving = false;
-                    //wait then choose another spot
-                    stateTimer = 1f;
+                    //once target food found- go onto next state
+                    if (targetFood != null)
+                    {
+                        myManager.allFood.Remove(targetFood);
+                        Destroy(targetFood);
+                        targetFood = null;
+                        fullnessVal = 3f;
+                        needsTime = needsTimeReset;
+                        StartEating();
+                    }
+                    else
+                    {
+                        //wait then choose another spot
+                        stateTimer = 1f;
+                    }
                 }
             }
             else
@@ -58,7 +89,18 @@ public class CupcakeBehavior : MonoBehaviour
                 }
             }
         }
-        
+
+        void IncrementNeeds()
+        {
+            fullnessVal -= 1;
+            needsTime = needsTimeReset;
+            Debug.Log("Cupcake fullness:" + fullnessVal);
+            if (fullnessVal <= 0)
+            {
+                FindFood();
+            }
+
+        }
         //eating state
         if (currentState == CupcakeState.Eating)
         {
@@ -83,13 +125,55 @@ public class CupcakeBehavior : MonoBehaviour
     //choose random spot
     void ChooseNewSpot()
     {
-       float randomX = Random.Range(-wanderDistance, wanderDistance);
+        if (fullnessVal <= 0)
+        {
+
+            if (FindFood())
+            {
+                return;
+            }
+        }
+
+        float randomX = Random.Range(-wanderDistance, wanderDistance);
        float randomY = Random.Range(-wanderDistance, wanderDistance);
 
        targetPos = transform.position + new Vector3(randomX, randomY,0);
        moving = true;
-       SetState(CupcakeState.Exploring);
+       //SetState(CupcakeState.Exploring);
        Debug.Log("Cupcake exploring!");
+    }
+
+    bool FindFood()
+    {
+        float closestDistance = 2000f;
+        GameObject closestFood = null;
+
+        foreach (GameObject food in myManager.allFood)
+        {
+            FoodScript foodScript = food.GetComponent<FoodScript>();
+            if (foodScript != null && foodScript.foodType == FoodScript.FoodType.Cupcake)
+            {
+                float distance = Vector3.Distance(transform.position, food.transform.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestFood = food;
+                }
+            }
+            
+        }
+
+        if (closestFood != null)
+        {
+            targetFood = closestFood;
+            targetPos = closestFood.transform.position;
+            moving = true;
+            
+            Debug.Log("Cupcake found");
+            return true;
+        }
+
+        return false;
     }
     
     //eating 

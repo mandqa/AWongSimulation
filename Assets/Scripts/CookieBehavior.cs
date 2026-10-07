@@ -114,10 +114,16 @@ public class CookieBehavior : MonoBehaviour
         GameObject closestFood = null;
         foreach(GameObject food in myManager.allFood)
         {
-            if(Vector3.Distance(transform.position,food.transform.position)<dist)
+            FoodScript foodScript = food.GetComponent<FoodScript>();
+            if (foodScript != null && foodScript.foodType == FoodScript.FoodType.Cookie)
             {
-                dist = Vector3.Distance(transform.position, food.transform.position);
-                closestFood = food;
+                float distance = Vector3.Distance(transform.position, food.transform.position);
+
+                if (distance < dist)
+                {
+                    dist = distance;
+                    closestFood = food;
+                }
             }
         }
         //go to the food - found it
@@ -127,11 +133,8 @@ public class CookieBehavior : MonoBehaviour
             targetPos = closestFood.transform.position;
             moving = true;
         }
-        else
-        {
-            Debug.Log("No food found");
-        }
         
+
     }
 
     //baking process
