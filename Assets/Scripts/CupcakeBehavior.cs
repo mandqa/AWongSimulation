@@ -195,6 +195,7 @@ public class CupcakeBehavior : MonoBehaviour
     //exploring again
     void StartExploring()
     {
+        myManager.EarnCoins(10);
         SetState(CupcakeState.Exploring);
         Debug.Log("Cupcake wokeup");
         ChooseNewSpot();

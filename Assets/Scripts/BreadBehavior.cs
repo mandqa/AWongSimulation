@@ -167,6 +167,7 @@ public class BreadBehavior : MonoBehaviour
     //knead again
     void StartKneadingAgain()
     {
+        myManager.EarnCoins(15);
         SetState(BreadState.Kneading);
         ChooseNewSpot();
     }

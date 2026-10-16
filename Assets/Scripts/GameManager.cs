@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public GameObject cupcakeFood;
     public GameObject breadFood;
 
+    public int coins = 0;
+    public TMPro.TMP_Text coinText;
+
     public List<GameObject> allFood = new List<GameObject>();
     
     GameObject selectedFood;
@@ -38,6 +41,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void EarnCoins(int amount)
+    {
+        coins += amount;
+        if (coinText != null)
+        {
+            coinText.text = "Coins: " + coins;
+        }
+        Debug.Log("Total coins" + coins);
+    }
     public void SelectedCookieFood()
     {
         selectedFood = cookieFood;

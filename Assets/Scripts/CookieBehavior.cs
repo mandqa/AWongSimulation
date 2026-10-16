@@ -149,6 +149,7 @@ public class CookieBehavior : MonoBehaviour
     //restinf
     void StartResting()
     {
+        myManager.EarnCoins(5);
         SetState(CookieState.Resting);
         stateTimer = 3f;
         Debug.Log("Cookie is resting");

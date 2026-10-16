@@ -1328,7 +1328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e1b3237ae6b4a26922810614fd498e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  cookieFood: {fileID: 4257088407642276596, guid: 015fc1b54fc6e41faa2c54cb47926cb5, type: 3}
+  cookieFood: {fileID: 3907247551059642089, guid: 166b20cb7925944da8d7f1d95d118bb6, type: 3}
   cupcakeFood: {fileID: 4262515372512458369, guid: 72134f7a7223d4914b4cb26a7e3df237, type: 3}
   breadFood: {fileID: 9125961838169061238, guid: 68c31e48aae6345a1838f88b140ff1bd, type: 3}
   allFood: []
