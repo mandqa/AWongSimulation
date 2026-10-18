@@ -5,6 +5,7 @@ public class CookieBehavior : MonoBehaviour
     public Animator animator;
     float fullnessVal = 3f;
     float stateTimer;
+    float searchTimer =0f;
 
     float needsTime;
 
@@ -23,7 +24,8 @@ public class CookieBehavior : MonoBehaviour
     {
         Searching, 
         Baking,
-        Resting
+        Resting,
+        Exhausted
     }
     
     CookieState currentState;
@@ -31,8 +33,9 @@ public class CookieBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        needsTime = needsTimeReset;  
-        
+        needsTime = needsTimeReset;
+        moving = false;
+        searchTimer = 0f;
         //start seraching state
         SetState(CookieState.Searching);
         FindFood();
@@ -74,6 +77,16 @@ public class CookieBehavior : MonoBehaviour
             }
         }
 
+        //look for new spawned food while idled
+        if (currentState == CookieState.Searching && !moving)
+        {
+            searchTimer -= Time.deltaTime;
+            if (searchTimer <= 0f)
+            {
+                FindFood();
+                searchTimer = 0.5f;
+            }
+        }
         //baking timer
         if (currentState == CookieState.Baking)
         {
@@ -93,7 +106,9 @@ public class CookieBehavior : MonoBehaviour
                 StartSearchingAgain();
             }
         }
-        
+
+        UpdateAnimation();
+
     }
 
     //fullness
@@ -110,10 +125,16 @@ public class CookieBehavior : MonoBehaviour
     
     void FindFood()
     {
+        moving = false;
+        targetFood = null;
+        if (myManager == null || myManager.allFood == null)
+            return;
         float dist = 2000f;
         GameObject closestFood = null;
         foreach(GameObject food in myManager.allFood)
         {
+            if (food == null)
+                continue;
             FoodScript foodScript = food.GetComponent<FoodScript>();
             if (foodScript != null && foodScript.foodType == FoodScript.FoodType.Cookie)
             {
@@ -141,7 +162,7 @@ public class CookieBehavior : MonoBehaviour
     void StartBaking()
     {
         SetState(CookieState.Baking);
-        stateTimer = 3f;
+        stateTimer = 2f;
         Debug.Log("Cookie is baking");
        
     }
@@ -149,7 +170,11 @@ public class CookieBehavior : MonoBehaviour
     //restinf
     void StartResting()
     {
-        myManager.EarnCoins(5);
+        if (myManager != null)
+        {
+            myManager.EarnCoins(5);
+        }
+
         SetState(CookieState.Resting);
         stateTimer = 3f;
         Debug.Log("Cookie is resting");
@@ -160,6 +185,8 @@ public class CookieBehavior : MonoBehaviour
     void StartSearchingAgain()
     {
         fullnessVal = 5f;
+        needsTime = needsTimeReset;
+        searchTimer = 0f;
         SetState(CookieState.Searching); 
         Debug.Log("Cookie is searching");
         FindFood();
@@ -174,17 +201,30 @@ public class CookieBehavior : MonoBehaviour
     //updates animator based on behavior state
     void UpdateAnimation()
     {
+        if (animator == null)
+            return;
         if (currentState == CookieState.Searching)
         {
-            animator.SetInteger("CookieState", 0);
+            if (moving)
+            {
+                animator.SetInteger("CookieState", 1); //walking state
+            }
+            else
+            {
+                animator.SetInteger("CookieState", 0); //idle
+            }
         }
         else if (currentState == CookieState.Baking)
         {
-            animator.SetInteger("CookieState", 1);
+            animator.SetInteger("CookieState", 2);
         }
         else if (currentState == CookieState.Resting)
         {
-            animator.SetInteger("CookieState", 2);
+            animator.SetInteger("CookieState", 3);
+        }
+        else if (currentState == CookieState.Exhausted)
+        {
+            animator.SetInteger("CookieState", 4);
         }
     }
 }
