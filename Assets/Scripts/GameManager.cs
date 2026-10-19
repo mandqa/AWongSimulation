@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         coins += amount;
         if (coinText != null)
         {
-            coinText.text = "Coins: " + coins;
+            coinText.text = " " + coins;
         }
         Debug.Log("Total coins" + coins);
     }
@@ -71,5 +71,25 @@ public class GameManager : MonoBehaviour
         GameObject newFood = Instantiate(selectedFood, newPos, Quaternion.identity);
         allFood.Add(newFood);
         Debug.Log("Food added" + allFood.Count);
+    }
+    
+    public void ReviveCookieWithCoins(CookieBehavior cookie)
+    {
+        if (cookie == null)
+            return;
+
+        if (cookie.currentState != CookieBehavior.CookieState.Exhausted)
+            return;
+
+        if (coins >= 50)
+        {
+            coins -= 50;
+
+            if (coinText != null)
+            {
+                coinText.text = " " + coins;
+                cookie.ReviveCookie();
+            }
+        }
     }
 }

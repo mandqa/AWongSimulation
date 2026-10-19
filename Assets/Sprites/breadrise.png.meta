@@ -1,0 +1,344 @@
+fileFormatVersion: 2
+guid: 09b2359fa7edf4efe80fce475a4faee9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1394975296705470297
+    second: sprite_sheet (29)_0
+  - first:
+      213: 2713069884766494280
+    second: sprite_sheet (29)_1
+  - first:
+      213: 5878049724683647209
+    second: sprite_sheet (29)_2
+  - first:
+      213: -4507968922548514190
+    second: sprite_sheet (29)_3
+  - first:
+      213: 268430699077512135
+    second: sprite_sheet (29)_4
+  - first:
+      213: -5256750066885256468
+    second: sprite_sheet (29)_5
+  - first:
+      213: 6684530184331858406
+    second: sprite_sheet (29)_6
+  - first:
+      213: -2864071441780615632
+    second: sprite_sheet (29)_7
+  - first:
+      213: -5568833277576650439
+    second: sprite_sheet (29)_8
+  - first:
+      213: 7973207968308910623
+    second: sprite_sheet (29)_9
+  - first:
+      213: 8809920830006281229
+    second: sprite_sheet (29)_10
+  - first:
+      213: -8154470823798070219
+    second: sprite_sheet (29)_11
+  - first:
+      213: 535529340935190463
+    second: sprite_sheet (29)_12
+  - first:
+      213: 1522040577912285375
+    second: sprite_sheet (29)_13
+  - first:
+      213: 2079335274531577573
+    second: sprite_sheet (29)_14
+  - first:
+      213: -6284684333859080630
+    second: sprite_sheet (29)_15
+  - first:
+      213: -5714496276016099570
+    second: sprite_sheet (29)_16
+  - first:
+      213: 4663749947288338490
+    second: sprite_sheet (29)_17
+  - first:
+      213: -1787832796619443865
+    second: sprite_sheet (29)_18
+  - first:
+      213: -9187125728731340028
+    second: sprite_sheet (29)_19
+  - first:
+      213: 8364751201946122468
+    second: sprite_sheet (29)_20
+  - first:
+      213: 7509965352351100537
+    second: sprite_sheet (29)_21
+  - first:
+      213: 2063928701108290154
+    second: sprite_sheet (29)_22
+  - first:
+      213: 6831446706517810412
+    second: sprite_sheet (29)_23
+  - first:
+      213: 1239492934505201418
+    second: sprite_sheet (29)_24
+  - first:
+      213: -7937844370329982079
+    second: sprite_sheet (29)_25
+  - first:
+      213: -2038139725858628165
+    second: sprite_sheet (29)_26
+  - first:
+      213: -3804726742377278936
+    second: sprite_sheet (29)_27
+  - first:
+      213: -4848511363538352377
+    second: sprite_sheet (29)_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: breadrise_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1080
+        width: 1080
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52d8832871b364118b4bfda93be14529
+      internalID: -535547587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: breadrise_1
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 1080
+        width: 1080
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67ae27e32163a457da80377b15488c21
+      internalID: 360270028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: breadrise_2
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 1080
+        width: 1080
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a748e7127a8a417881a5616ebeb7824
+      internalID: -914305879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: breadrise_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1080
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e93b27ad062542bbadbd8edc0e66692
+      internalID: 1664371495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: breadrise_4
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 0
+        width: 1080
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87b30febef6fd46df9faab809e86099a
+      internalID: 2063014676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: breadrise_5
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 0
+        width: 1080
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce9e29e3e362b4aafb08b1ee7c5c7041
+      internalID: -1786898074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: edaa0665931094b2bbc17c82b2aeb16f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":2.0},"gridSpriteSize":{"x":1080.0,"y":1080.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      breadrise_0: -535547587
+      breadrise_1: 360270028
+      breadrise_2: -914305879
+      breadrise_3: 1664371495
+      breadrise_4: 2063014676
+      breadrise_5: -1786898074
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

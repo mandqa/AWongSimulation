@@ -3,15 +3,20 @@ using UnityEngine;
 public class CookieBehavior : MonoBehaviour
 {
     public Animator animator;
-    float fullnessVal = 3f;
+    public float fullnessVal = 5f;
+    public float hpVal= 10f;
+    public float healthLossRate = 1f;
+    public float healthLossAmount = 2f;
+    public float healthLossInterval = 2f;
+    float healthLossTimer;
     float stateTimer;
-    float searchTimer =0f;
-
+    float searchTimer = 0f;
     float needsTime;
 
     public float needsTimeReset;
 
     public float needsTimeStep;
+    float reviveIdleTimer = 0f;
 
     public GameManager myManager;
 
@@ -19,8 +24,11 @@ public class CookieBehavior : MonoBehaviour
 
     bool moving;
     
+    SpriteRenderer spriteRenderer;
+    Color normalColor;
+    
     //behavior states 
-    enum CookieState
+    public enum CookieState
     {
         Searching, 
         Baking,
@@ -28,11 +36,17 @@ public class CookieBehavior : MonoBehaviour
         Exhausted
     }
     
-    CookieState currentState;
+    public CookieState currentState;
     GameObject targetFood;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        //orginal sprite color
+        if (spriteRenderer != null)
+        {
+            normalColor = spriteRenderer.color;
+        }
         needsTime = needsTimeReset;
         moving = false;
         searchTimer = 0f;
@@ -44,9 +58,35 @@ public class CookieBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (reviveIdleTimer > 0f)
+        {
+            reviveIdleTimer -= Time.deltaTime;
+            if (animator != null)
+            {
+                animator.SetInteger("CookieState", 0);
+            }
+        }
+        //exhausted-health decreases until reaches 0
+        if(currentState == CookieState.Exhausted)
+        {
+            healthLossTimer -= Time.deltaTime;
+            
+           
+            if (healthLossTimer <=0f)
+            {
+                hpVal -= healthLossAmount;
+                hpVal = Mathf.Max(0f, hpVal);
+                healthLossTimer = healthLossInterval;
+            }
+
+            //stops normal behavior when exhausted
+            return;
+        }
+        //searching - hunger decreases over time
         if (currentState == CookieState.Searching)
         {
             needsTime -= needsTimeStep * Time.deltaTime;
+           //removes hunger point
             if (needsTime < 0)
             {
                 IncrementNeeds();
@@ -81,6 +121,7 @@ public class CookieBehavior : MonoBehaviour
         if (currentState == CookieState.Searching && !moving)
         {
             searchTimer -= Time.deltaTime;
+            //checks for food every half sec
             if (searchTimer <= 0f)
             {
                 FindFood();
@@ -117,16 +158,21 @@ public class CookieBehavior : MonoBehaviour
         fullnessVal -= 1;
         needsTime = needsTimeReset;
         Debug.Log("Cookie fullness:" + fullnessVal);
-        if (fullnessVal <= 0 && currentState == CookieState.Searching)
+        //exhaust cookie when hunger is zero
+        if (fullnessVal <= 0 && currentState != CookieState.Exhausted)
         {
-            FindFood();
+            fullnessVal = 0;
+            moving = false;
+            SetState(CookieState.Exhausted);
         }
     }
     
+    //finds closest food avaiable 
     void FindFood()
     {
         moving = false;
         targetFood = null;
+        //stop if food list is missing or gamemanger
         if (myManager == null || myManager.allFood == null)
             return;
         float dist = 2000f;
@@ -196,6 +242,18 @@ public class CookieBehavior : MonoBehaviour
     void SetState(CookieState newState)
     {
         currentState = newState;
+        //make cookie look gray when exhausted
+        if (spriteRenderer != null)
+        {
+            if (currentState == CookieState.Exhausted)
+            {
+                spriteRenderer.color = Color.gray;
+            }
+            else
+            {
+                spriteRenderer.color = normalColor;
+            }
+        }
         UpdateAnimation();
     }
     //updates animator based on behavior state
@@ -203,6 +261,7 @@ public class CookieBehavior : MonoBehaviour
     {
         if (animator == null)
             return;
+        //searching uses idle or walk animations
         if (currentState == CookieState.Searching)
         {
             if (moving)
@@ -226,5 +285,38 @@ public class CookieBehavior : MonoBehaviour
         {
             animator.SetInteger("CookieState", 4);
         }
+    }
+
+    public void ReviveCookie()
+    {
+        //checks if cookie is exhausted
+        if (currentState != CookieState.Exhausted)
+            return;
+        //restore health and hunger
+        hpVal = 10f;
+        fullnessVal = 5f;
+        
+        //reset timers
+        healthLossTimer = healthLossInterval;
+        needsTime = needsTimeReset;
+        searchTimer = 0f;
+        stateTimer = 0f;
+
+        //stop previous movement
+        moving = false;
+        targetFood = null;
+
+        SetState(CookieState.Searching);
+
+        reviveIdleTimer = 1f;
+        //force idle animation
+        if (animator != null)
+        {
+            animator.Play("CookieIdle", 0, 0f);
+            animator.SetInteger("CookieState", 0);
+        }
+        
+        //look for food again
+        FindFood();
     }
 }

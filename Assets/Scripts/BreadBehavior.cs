@@ -3,48 +3,92 @@ using UnityEngine;
 public class BreadBehavior : MonoBehaviour
 {
     public Animator animator;
-    float fullnessVal = 3f;
+    public float fullnessVal = 3f;
+    
     float stateTimer;
+    float lifeTimer;
+    public float lifespan = 60f;
+    public float hpVal= 10f;
+    public float maxHp = 10f;
+    bool isExhausted = false;
+    
     float needsTime;
+    float wanderTimer;
     public float needsTimeReset;
     public float needsTimeStep;
+    public float startingFullness = 3f;
+    
     public GameManager myManager;
     
     //bread behavior state
-    enum BreadState
+    public enum BreadState
     {
+        Idle,
         Kneading,
         Rising,
-        Baking
+        Baking,
+        Exhausted
     }
+    Vector3 homePosition;
     Vector3 targetPos;
     bool moving;
     //movement
     public float moveSpeed = 0.7f;
     public float wanderDistance = 2f;
-   
+    public float wanderWaitTime = 1f;
     GameObject targetFood;
 
-    BreadState currentState;
+    public BreadState currentState;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         needsTime = needsTimeReset;
-        SetState(BreadState.Kneading);
-        ChooseNewSpot();
+        fullnessVal = startingFullness;
+        homePosition = transform.position;
+        lifeTimer = lifespan;
+        
+        SetState(BreadState.Idle);
+        //ChooseNewSpot();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //bread slowly gets hungry while kneading
-        if (currentState == BreadState.Kneading)
+        //stop normal behavior after exhaustion
+        if (isExhausted)
         {
-            needsTime -= needsTimeStep * Time.deltaTime;
-            if (needsTime <= 0)
+            //let exhausted anim play before dissappearing
+            if (stateTimer > 0f)
             {
-                IncrementalNeeds();
+                stateTimer -= Time.deltaTime;
             }
+            else
+            {
+                Destroy(gameObject);
+            }
+
+            return;
+        }
+
+        //count down bread total lifespan
+        lifeTimer -= Time.deltaTime;
+        //update health bar based on remainin lifepsan
+        hpVal = Mathf.Clamp((lifeTimer/lifespan)*maxHp, 0f, maxHp);
+        if (lifeTimer <= 0f)
+        {
+            SetState(BreadState.Exhausted);
+            isExhausted = true;
+            moving = false;
+            targetFood = null;
+            
+            //time allowed for exhaust animation
+            stateTimer = 3f;
+            return;
+        }
+
+        if (currentState == BreadState.Idle && targetFood == null)
+        {
+            FindFood();
         }
         //moving towards dough
         if (moving)
@@ -54,17 +98,45 @@ public class BreadBehavior : MonoBehaviour
             if (Vector3.Distance(transform.position, targetPos) < 0.1f)
             {
                 moving = false;
+                wanderTimer = wanderWaitTime;
+
+                //consume dough when reached
                 if (targetFood != null)
                 {
                     myManager.allFood.Remove(targetFood);
                     Destroy(targetFood);
                     targetFood = null;
-                    
-                    //restoru fullness
-                    fullnessVal = 3f;
+
+                    fullnessVal = startingFullness;
                     needsTime = needsTimeReset;
-                    StartRising();
+                    SetState(BreadState.Kneading);
+                    stateTimer = 3f;
                 }
+            }
+        }
+        else if (currentState == BreadState.Idle || currentState == BreadState.Kneading)
+        {
+            wanderTimer -= Time.deltaTime;
+
+            if (wanderTimer <= 0f)
+            {
+                ChooseNewSpot();
+            }
+        }
+        
+        //needs decrease while kneading
+        if (currentState == BreadState.Kneading)
+        {
+            stateTimer -= Time.deltaTime;
+            if (stateTimer <= 0f)
+            {
+                Debug.Log("swithcing to rising");
+                StartRising();
+            }
+            needsTime -= needsTimeStep * Time.deltaTime;
+            if (needsTime <= 0f)
+            {
+                IncrementalNeeds();
             }
         }
         //rising
@@ -78,12 +150,12 @@ public class BreadBehavior : MonoBehaviour
         }
         
         //baking
-        if (currentState == BreadState.Baking)
+        else if (currentState == BreadState.Baking)
         {
             stateTimer -= Time.deltaTime;
             if (stateTimer <= 0)
             {
-                StartKneadingAgain();
+                FinishBaking();
             }
         }
     }
@@ -96,17 +168,28 @@ public class BreadBehavior : MonoBehaviour
 
         if (fullnessVal <= 0)
         {
-            FindFood();
+            if (!FindFood())
+            {
+                SetState(BreadState.Idle);
+            }
         }
     }
 
     bool FindFood()
     {
+        if (myManager == null)
+        {
+            return false;
+        }
         float dist = 2000f;
         GameObject closestFood = null;
 
         foreach (GameObject food in myManager.allFood)
         {
+            if (food == null)
+            {
+                continue;
+            }
             FoodScript foodScript = food.GetComponent<FoodScript>();
 
             if (foodScript != null && foodScript.foodType == FoodScript.FoodType.Bread)
@@ -135,6 +218,7 @@ public class BreadBehavior : MonoBehaviour
     //wander around slowly
     void ChooseNewSpot()
     {
+        //look for dough if bread needs some
         if (fullnessVal <= 0)
         {
             if (FindFood())
@@ -146,7 +230,7 @@ public class BreadBehavior : MonoBehaviour
         float randomX = Random.Range(-wanderDistance, wanderDistance);
         float randomY = Random.Range(-wanderDistance, wanderDistance);
 
-        targetPos = transform.position + new Vector3(randomX, randomY, 0);
+        targetPos = homePosition + new Vector3(randomX, randomY, 0);
         moving = true;
     }   
     
@@ -155,6 +239,7 @@ public class BreadBehavior : MonoBehaviour
     {
         SetState(BreadState.Rising);
         stateTimer = 4f;
+        moving = false;
     }
 
     //baking state
@@ -162,14 +247,20 @@ public class BreadBehavior : MonoBehaviour
     {
         SetState(BreadState.Baking);
         stateTimer = 3f;
+        moving = false;
     }
 
-    //knead again
-    void StartKneadingAgain()
+    void FinishBaking()
     {
-        myManager.EarnCoins(15);
-        SetState(BreadState.Kneading);
-        ChooseNewSpot();
+        if (myManager != null)
+        {
+            myManager.EarnCoins(15);
+        }
+
+        SetState(BreadState.Idle);
+
+        moving = false;
+        targetFood = null;
     }
 
     void SetState(BreadState newState)
@@ -181,17 +272,30 @@ public class BreadBehavior : MonoBehaviour
     //update anim
     void UpdateAnimation()
     {
-        if (currentState == BreadState.Kneading)
+        if (animator == null)
+        {
+            return;
+        }
+
+        if (currentState == BreadState.Idle)
         {
             animator.SetInteger("BreadState", 0);
         }
-        else if (currentState == BreadState.Rising)
+       else if (currentState == BreadState.Kneading)
         {
             animator.SetInteger("BreadState", 1);
         }
-        else if (currentState == BreadState.Baking)
+        else if (currentState == BreadState.Rising)
         {
             animator.SetInteger("BreadState", 2);
+        }
+        else if (currentState == BreadState.Baking)
+        {
+            animator.SetInteger("BreadState", 3);
+        }
+        else if (currentState == BreadState.Exhausted)
+        {
+            animator.SetInteger("Breadstate", 4);
         }
     }
 }
