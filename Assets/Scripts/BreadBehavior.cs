@@ -57,16 +57,6 @@ public class BreadBehavior : MonoBehaviour
         //stop normal behavior after exhaustion
         if (isExhausted)
         {
-            //let exhausted anim play before dissappearing
-            if (stateTimer > 0f)
-            {
-                stateTimer -= Time.deltaTime;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-
             return;
         }
 
@@ -76,13 +66,7 @@ public class BreadBehavior : MonoBehaviour
         hpVal = Mathf.Clamp((lifeTimer/lifespan)*maxHp, 0f, maxHp);
         if (lifeTimer <= 0f)
         {
-            SetState(BreadState.Exhausted);
-            isExhausted = true;
-            moving = false;
-            targetFood = null;
-            
-            //time allowed for exhaust animation
-            stateTimer = 3f;
+            BecomeExhausted();
             return;
         }
 
@@ -254,7 +238,7 @@ public class BreadBehavior : MonoBehaviour
     {
         if (myManager != null)
         {
-            myManager.EarnCoins(15);
+            myManager.EarnCoins(100);
         }
 
         SetState(BreadState.Idle);
@@ -297,5 +281,32 @@ public class BreadBehavior : MonoBehaviour
         {
             animator.SetInteger("Breadstate", 4);
         }
+    }
+
+    void BecomeExhausted()
+    {
+        lifeTimer = 0f;
+        hpVal = 0f;
+        isExhausted = true;
+        moving = false;
+        targetFood = null;
+        SetState(BreadState.Exhausted);
+    }
+
+    public void ReviveBread()
+    {
+        if (!isExhausted)
+            return;
+        
+        lifeTimer = lifespan;
+        hpVal = maxHp;
+        fullnessVal = startingFullness;
+        needsTime = needsTimeReset;
+        
+        isExhausted = false;
+        moving = false;
+        targetFood = null;
+        stateTimer = 0f;
+        SetState(BreadState.Idle);
     }
 }

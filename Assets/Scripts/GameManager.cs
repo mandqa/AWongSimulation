@@ -92,4 +92,25 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    
+    public void ReviveBreadWithCoins(BreadBehavior bread)
+    {
+        if (bread == null)
+            return;
+
+        if (bread.currentState != BreadBehavior.BreadState.Exhausted)
+            return;
+
+        if (coins >= 50)
+        {
+            coins -= 50;
+
+            if (coinText != null)
+            {
+                coinText.text = " " + coins;
+                bread.ReviveBread();
+            }
+            
+        }
+    }
 }
