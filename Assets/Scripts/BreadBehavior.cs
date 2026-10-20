@@ -19,7 +19,9 @@ public class BreadBehavior : MonoBehaviour
     public float startingFullness = 3f;
     
     public GameManager myManager;
-    
+
+    SpriteRenderer spriteRenderer;
+    Color normalColorb;
     //bread behavior state
     public enum BreadState
     {
@@ -42,6 +44,12 @@ public class BreadBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            normalColorb = spriteRenderer.color;
+        }
         needsTime = needsTimeReset;
         fullnessVal = startingFullness;
         homePosition = transform.position;
@@ -66,6 +74,7 @@ public class BreadBehavior : MonoBehaviour
         hpVal = Mathf.Clamp((lifeTimer/lifespan)*maxHp, 0f, maxHp);
         if (lifeTimer <= 0f)
         {
+            Debug.Log("Bread lifespan reached zero");
             BecomeExhausted();
             return;
         }
@@ -250,6 +259,17 @@ public class BreadBehavior : MonoBehaviour
     void SetState(BreadState newState)
     {
         currentState = newState;
+        if (spriteRenderer != null)
+        {
+            if (currentState == BreadState.Exhausted)
+            {
+                spriteRenderer.color = Color.gray;
+            }
+            else
+            {
+                spriteRenderer.color = normalColorb;
+            }
+        }
         UpdateAnimation();
     }
     
@@ -279,7 +299,7 @@ public class BreadBehavior : MonoBehaviour
         }
         else if (currentState == BreadState.Exhausted)
         {
-            animator.SetInteger("Breadstate", 4);
+            animator.SetInteger("BreadState", 4);
         }
     }
 
@@ -295,18 +315,26 @@ public class BreadBehavior : MonoBehaviour
 
     public void ReviveBread()
     {
-        if (!isExhausted)
+        if (currentState != BreadState.Exhausted)
             return;
         
         lifeTimer = lifespan;
         hpVal = maxHp;
         fullnessVal = startingFullness;
+        
         needsTime = needsTimeReset;
+        wanderTimer = wanderWaitTime;
         
         isExhausted = false;
         moving = false;
         targetFood = null;
         stateTimer = 0f;
         SetState(BreadState.Idle);
+
+        if (animator != null)
+        {
+            animator.Play("Emptybowl", 0, 0f);
+            animator.SetInteger("BreadState", 0);
+        }
     }
 }

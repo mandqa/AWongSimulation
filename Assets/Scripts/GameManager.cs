@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public int coins = 0;
     public TMPro.TMP_Text coinText;
 
+    public Collider2D foodPlacementArea;
+
     public List<GameObject> allFood = new List<GameObject>();
     
     GameObject selectedFood;
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
     {
         if (leftMouse.WasReleasedThisFrame())
         {
+            Debug.Log("MouseClick detected");
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 return;
@@ -66,11 +69,24 @@ public class GameManager : MonoBehaviour
     }
     void MakeFood()
     {
-        Vector3 newPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        newPos.z = 0;
-        GameObject newFood = Instantiate(selectedFood, newPos, Quaternion.identity);
+        
+        if (foodPlacementArea == null)
+        {
+            return;
+        }
+        Vector3 mouseScreenPos = Mouse.current.position.ReadValue();
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, -Camera.main.transform.position.z));
+        Vector2 foodPos = new Vector2(mousePos.x, mousePos.y);
+        
+        if (!foodPlacementArea.OverlapPoint(foodPos))
+        {
+            return;
+        }
+        mousePos.z = 0f;
+        GameObject newFood = Instantiate(selectedFood, mousePos, Quaternion.identity);
         allFood.Add(newFood);
         Debug.Log("Food added" + allFood.Count);
+        
     }
     
     public void ReviveCookieWithCoins(CookieBehavior cookie)
@@ -112,5 +128,24 @@ public class GameManager : MonoBehaviour
             }
             
         }
+    }
+
+    public void ReviveCupcakeWithCoins(CupcakeBehavior cupcake)
+    {
+        if (cupcake == null)
+            return;
+        if (cupcake.currentState != CupcakeBehavior.CupcakeState.Exhausted)
+            return;
+        if (coins >= 50)
+        {
+            coins -= 50;
+            if (coinText != null)
+            {
+                coinText.text = " " + coins;
+            }
+
+            cupcake.ReviveCupcake();
+        }
+        
     }
 }

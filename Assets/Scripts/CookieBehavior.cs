@@ -218,7 +218,7 @@ public class CookieBehavior : MonoBehaviour
     {
         if (myManager != null)
         {
-            myManager.EarnCoins(5);
+            myManager.EarnCoins(15);
         }
 
         SetState(CookieState.Resting);

@@ -1,0 +1,330 @@
+fileFormatVersion: 2
+guid: 52bf1f5a14b0a4f1b8745142683e7bc0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3433978940998728373
+    second: sprite_sheet (32)_0
+  - first:
+      213: -2928171271189503327
+    second: sprite_sheet (32)_1
+  - first:
+      213: -6848888495269197192
+    second: sprite_sheet (32)_2
+  - first:
+      213: 6759146117708472455
+    second: sprite_sheet (32)_3
+  - first:
+      213: -8354748051844068482
+    second: sprite_sheet (32)_4
+  - first:
+      213: 319844931773070021
+    second: sprite_sheet (32)_5
+  - first:
+      213: -1060574159011286926
+    second: sprite_sheet (32)_6
+  - first:
+      213: -246141822692636639
+    second: sprite_sheet (32)_7
+  - first:
+      213: -4319064813572877013
+    second: sprite_sheet (32)_8
+  - first:
+      213: 7191570621515983133
+    second: sprite_sheet (32)_9
+  - first:
+      213: -7868045110582235935
+    second: sprite_sheet (32)_10
+  - first:
+      213: -8867018577291312139
+    second: sprite_sheet (32)_11
+  - first:
+      213: 9222457072032351521
+    second: sprite_sheet (32)_12
+  - first:
+      213: 4631866437491082477
+    second: sprite_sheet (32)_13
+  - first:
+      213: 8480983347036493561
+    second: sprite_sheet (32)_14
+  - first:
+      213: 7044039548505309692
+    second: sprite_sheet (32)_15
+  - first:
+      213: -7497000777305941532
+    second: sprite_sheet (32)_16
+  - first:
+      213: 2540760421452380322
+    second: sprite_sheet (32)_17
+  - first:
+      213: 1899434836991990031
+    second: sprite_sheet (32)_18
+  - first:
+      213: -2887241681676608819
+    second: sprite_sheet (32)_19
+  - first:
+      213: -1482135060127047543
+    second: sprite_sheet (32)_20
+  - first:
+      213: 5279549774853003283
+    second: sprite_sheet (32)_21
+  - first:
+      213: -455419493075484158
+    second: sprite_sheet (32)_22
+  - first:
+      213: 1922732235519391093
+    second: sprite_sheet (32)_23
+  - first:
+      213: -6636859093847909630
+    second: sprite_sheet (32)_24
+  - first:
+      213: -6328622286621662265
+    second: sprite_sheet (32)_25
+  - first:
+      213: 6498599380695393481
+    second: sprite_sheet (32)_26
+  - first:
+      213: 6147150396849298000
+    second: sprite_sheet (32)_27
+  - first:
+      213: -8002320000077528743
+    second: sprite_sheet (32)_28
+  - first:
+      213: -7860553772046296266
+    second: sprite_sheet (32)_29
+  - first:
+      213: 959554304142108086
+    second: sprite_sheet (32)_30
+  - first:
+      213: 2729497146102031491
+    second: sprite_sheet (32)_31
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sleep cupcake_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1080
+        width: 1080
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28a688ad5623142ab8efea1f8f5e87ff
+      internalID: 1330230112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sleep cupcake_1
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 1080
+        width: 1080
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2f51368e18e54270b2a9126a697960e
+      internalID: 689130470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sleep cupcake_2
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 1080
+        width: 1080
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3846d64285f845e487d7b02dc775418
+      internalID: -1238236044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sleep cupcake_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1080
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09fab8628aa614ac68390e813c7927d0
+      internalID: -1782998459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sleep cupcake_4
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 0
+        width: 1080
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9f59571cfc864807aba137c254f8a76
+      internalID: 775495919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 7ad28e82d5ba3452daddcb05fc012b04
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":2.0},"gridSpriteSize":{"x":1080.0,"y":1080.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      sleep cupcake_0: 1330230112
+      sleep cupcake_1: 689130470
+      sleep cupcake_2: -1238236044
+      sleep cupcake_3: -1782998459
+      sleep cupcake_4: 775495919
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
